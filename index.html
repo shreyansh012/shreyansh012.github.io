@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shreyansh Arora · Engineering AI systems you can trust</title>
+<meta name="description" content="Shreyansh Arora builds AI ingestion and retrieval systems, and the checks that catch a pipeline that is green but lying.">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://shreyansh012.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shreyansh Arora">
+<meta property="og:title" content="Shreyansh Arora · Engineering AI systems you can trust">
+<meta property="og:description" content="AI ingestion and retrieval systems, and the checks that catch a pipeline that is green but lying.">
+<meta property="og:url" content="https://shreyansh012.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='black'/%3E%3Cpath d='m8 17l5 5 11-12' fill='none' stroke='cyan' stroke-width='3'/%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.className = d.className.replace("no-js", "js");
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") { d.setAttribute("data-theme", t); }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="/style.css">
+<script src="/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar-row">
+    <a class="brand" href="/">~/shreyansh</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certification">Certification</a></li>
+        <li><a href="#demos">Demos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch to light theme">Light theme</button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Software engineer · RAG · search · data pipelines</p>
+      <h1 id="hero-title">Engineering AI systems <span class="accent">you can trust.</span></h1>
+      <p class="lead">I build ingestion and retrieval systems. I also build the checks that catch a pipeline that is green but lying.</p>
+      <p class="employment mono">Software Engineer at Elastiq AI, since 2024.</p>
+      <p class="cta">
+        <a class="btn primary" href="#work">See the work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </p>
+    </div>
+
+    <section class="board" id="board" aria-labelledby="board-title">
+      <h2 class="board-title" id="board-title"><span>Status board</span><span class="tag">invented example</span></h2>
+      <p class="board-intro">A made-up nightly job that copies records into a search index. Every check is green.</p>
+      <ol class="stages">
+        <li class="stage">
+          <div class="stage-head">
+            <span class="stage-name">collect</span>
+            <span class="ok"><span aria-hidden="true">✓ </span>pass: job finished</span>
+          </div>
+          <div class="honest">
+            <span class="bar" aria-hidden="true"><i style="--v:10"></i></span>
+            <p class="honest-note ok"><span aria-hidden="true">✓ </span>Honest check: all records came in.</p>
+          </div>
+        </li>
+        <li class="stage">
+          <div class="stage-head">
+            <span class="stage-name">clean</span>
+            <span class="ok"><span aria-hidden="true">✓ </span>pass: no errors logged</span>
+          </div>
+          <div class="honest">
+            <span class="bar" aria-hidden="true"><i style="--v:7"></i></span>
+            <p class="honest-note bad"><span aria-hidden="true">✗ </span>Honest check: some records were dropped. No error was raised.</p>
+          </div>
+        </li>
+        <li class="stage">
+          <div class="stage-head">
+            <span class="stage-name">index</span>
+            <span class="ok"><span aria-hidden="true">✓ </span>pass: write succeeded</span>
+          </div>
+          <div class="honest">
+            <span class="bar" aria-hidden="true"><i style="--v:7"></i></span>
+            <p class="honest-note warn"><span aria-hidden="true">! </span>Honest check: it wrote what it received, so the gap carried on.</p>
+          </div>
+        </li>
+        <li class="stage">
+          <div class="stage-head">
+            <span class="stage-name">publish</span>
+            <span class="ok"><span aria-hidden="true">✓ </span>pass: page is up</span>
+          </div>
+          <div class="honest">
+            <span class="bar" aria-hidden="true"><i style="--v:7"></i></span>
+            <p class="honest-note warn"><span aria-hidden="true">! </span>Honest check: the page is up, but it shows a partial index.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="verdict">
+        <p><span class="label">Dashboard says:</span> <strong class="ok"><span aria-hidden="true">✓ </span>healthy</strong></p>
+        <p class="honest"><span class="label">Data says:</span> <strong class="warn">green but lying</strong></p>
+      </div>
+      <div class="explain honest">
+        <p>The honest check compares what went in with what came out, between each stage. When they differ, the run fails loudly. A green job tells you the code ran. It does not tell you the data arrived.</p>
+      </div>
+      <p class="nojs-note">This board needs JavaScript to switch views, so both views are shown above.</p>
+      <button type="button" class="btn reveal" id="reveal" aria-expanded="false">Show what an honest check would catch</button>
+      <p class="sr-only" id="board-live" role="status"></p>
+    </section>
+  </div>
+</section>
+
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <p class="kicker">01 · Significant work</p>
+    <h2 id="work-title">Work, and how each claim is backed</h2>
+    <p class="section-intro">Each card carries a chip. The chip says how I can back the claim. All 2026 work here is AI-assisted, with tests and review gates.</p>
+
+    <ul class="facts">
+      <li><strong>Over a million</strong><span>tickets in an ingestion project I worked on</span></li>
+      <li><strong>Millions</strong><span>of lines of code in the code base I worked on</span></li>
+      <li><strong>About two thirds smaller</strong><span>the application's container image, which I helped cut</span></li>
+      <li><strong>Hundreds</strong><span>of pull requests reviewed before merge</span></li>
+    </ul>
+    <p class="fine">Numbers are rounded on purpose. Some are my own account of the work, not a record I can show.</p>
+
+    <div class="legend">
+      <p><span class="chip measured">measured</span> A run or a test gave a result I can show.</p>
+      <p><span class="chip documented">documented</span> A written design, pull request or record backs it.</p>
+      <p><span class="chip demo">demo</span> You can run it yourself in a public repo. Demos are still in progress, so no card has this chip yet.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <h3>Ingestion that restarts where it stopped</h3>
+        <p>I built a code-ingestion pipeline on Argo Workflows. Parsing, embedding and indexing are separate stages. Embedding is the paid step that turns text into numbers for search. If a worker crashes, the paid work is kept, and the restart picks up where it stopped.</p>
+        <div class="chips"><span class="chip documented">documented</span><span class="chip soon">demo in progress</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Never pay for the same embedding twice</h3>
+        <p>Each piece of text gets an id built from its content. Vectors are reused across versions, behind a guard that checks the model is the same. Progress is saved in safe steps. I also fixed a bug that re-embedded a whole set of unchanged documents. A re-run on unchanged data reused the stored vectors in one documented run, which I did with a colleague.</p>
+        <div class="chips"><span class="chip documented">documented</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Search that filters first</h3>
+        <p>I directed the redesign of a vector search index for a code library with many versions. It holds hundreds of thousands of chunks. Vectors are half size, and filters now run inside the vector query. Before, filters ran after the nearest hits were fetched, so narrow searches returned almost nothing. The rebuild script shows a dry run first.</p>
+        <div class="chips"><span class="chip documented">documented</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Answers that get graded</h3>
+        <p>I built an evaluation suite for code answers. It has frozen question sets, must-mention checks, checks for made-up file paths and checks for tools that do not exist. A pass bar decides each result. I reported an honest first pass, then a fix cycle.</p>
+        <div class="chips"><span class="chip measured">measured</span><span class="chip soon">demo in progress</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Code tools for AI agents</h3>
+        <p>I built tools that let an AI agent trace a flow, find what a change reaches, fetch source and search exact text. Every tool has hard limits and says why it stopped. A routing rule sends code questions to the code tools. Before the rule, sampled code questions had used the wrong tools. Extraction workers for Java, TypeScript, JavaScript and C# feed one code graph behind them.</p>
+        <div class="trace" role="group" aria-label="Invented example of trust labels on code links">
+          <p class="trace-title">Invented example. Not real code.</p>
+          <div class="hop"><span>report screen → /reports route</span><span class="label-chip proven">proven</span></div>
+          <div class="hop"><span>/reports route → build_report()</span><span class="label-chip convention">by convention</span></div>
+          <div class="hop"><span>build_report() → old export job</span><span class="label-chip unknown">unknown</span></div>
+          <p class="trace-key">proven: an exact match. by convention: the names match, but nothing proves it. unknown: no match found.</p>
+        </div>
+        <div class="chips"><span class="chip measured">measured</span><span class="chip soon">demo in progress</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Failures that looked like success</h3>
+        <p>I found and fixed runs that said success after they had failed. Nightly search-index backups had never worked. An access error stayed hidden because the success test searched the log for the word "error". Loads showed success with empty data. A failed parse wiped data. A workflow said it passed after a failure. Retries never ran.</p>
+        <div class="chips"><span class="chip documented">documented</span></div>
+      </article>
+
+      <article class="card">
+        <h3>Delivery that fails closed</h3>
+        <p>I packaged the product for customer-hosted delivery. The release pipeline fails closed: a check that cannot run counts as a failure. Each check has a self-test that plants a mistake to prove the check rejects it.</p>
+        <div class="chips"><span class="chip documented">documented</span></div>
+      </article>
+
+      <article class="card">
+        <h3>A model deploy with a gate</h3>
+        <p>I built a Vertex AI pipeline on a public BigQuery dataset. It prepares the data, trains a simple model, tests it and registers it. A new model goes live only if it beats the old one. Models and scores are versioned.</p>
+        <div class="chips"><span class="chip documented">documented</span><span class="chip soon">demo in progress</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="wrap">
+    <p class="kicker">02 · Honest skill depth</p>
+    <h2 id="skills-title">What I know well, and what I have only used</h2>
+    <p class="section-intro">Each skill sits at one level. I keep a skill out of the list when I have not done real work with it.</p>
+
+    <div class="depth">
+      <section class="deep" aria-labelledby="deep-title">
+        <h3 id="deep-title">Deep</h3>
+        <p class="what">I have built and fixed real systems with these.</p>
+        <ul>
+          <li>Python <small>async with trio, Flask, Pydantic, Alembic</small></li>
+          <li>Argo Workflows <small>ingestion templates</small></li>
+          <li>Kubernetes and Helm</li>
+          <li>RAG ingestion and retrieval</li>
+          <li>PostgreSQL <small>advisory locks, row-level security</small></li>
+          <li>OpenSearch vector search</li>
+        </ul>
+      </section>
+      <section class="strong" aria-labelledby="strong-title">
+        <h3 id="strong-title">Strong</h3>
+        <p class="what">Each one has real work behind it.</p>
+        <ul>
+          <li>Terraform on AWS</li>
+          <li>AWS Bedrock</li>
+          <li>Java</li>
+          <li>Compiler APIs for code analysis <small>Eclipse JDT, TypeScript compiler API, Roslyn</small></li>
+          <li>LLM agent tools and MCP</li>
+          <li>Docker, GitHub Actions and Bash</li>
+          <li>Testing with property and golden tests</li>
+          <li>Google Cloud ML <small>Vertex AI Pipelines, BigQuery, Cloud Storage</small></li>
+          <li>Auth and security <small>OIDC, JWT, Keycloak</small></li>
+          <li>Connectors for Jira, Confluence, SVN and GitLab</li>
+        </ul>
+      </section>
+      <section class="used" aria-labelledby="used-title">
+        <h3 id="used-title">Used</h3>
+        <p class="what">I have worked with these, but I am not an expert.</p>
+        <ul>
+          <li>React</li>
+          <li>FastAPI</li>
+          <li>Neo4j and Cypher <small>a first integration and a prototype</small></li>
+          <li>GraphQL</li>
+          <li>C# and .NET</li>
+          <li>PyArrow and DuckDB</li>
+          <li>Redis</li>
+          <li>SonarQube and AI review bots</li>
+          <li>GitHub Copilot and Claude Code, as tools</li>
+          <li>Cloud SQL and other hosted databases <small>evaluation and planning only</small></li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="how">How I work: AI-assisted, with tests and review gates. I direct the work, decide, review, merge and apply. I review my own pull requests as if someone else wrote them. I write the test first.</p>
+  </div>
+</section>
+
+<section class="section" id="certification" aria-labelledby="cert-title">
+  <div class="wrap">
+    <p class="kicker">03 · Certification</p>
+    <h2 id="cert-title">Google Cloud Professional Data Engineer</h2>
+    <div class="cert">
+      <dl>
+        <dt>Issued</dt><dd>Jan 2025</dd>
+        <dt>Expires</dt><dd>Jan 2027</dd>
+      </dl>
+      <a class="btn" href="https://www.credly.com/earner/earned/badge/822e6e19-30e1-4149-afbc-f03135c11e09" rel="noopener noreferrer">Check the badge on Credly</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="demos" aria-labelledby="demos-title">
+  <div class="wrap">
+    <p class="kicker">04 · Demos and notes</p>
+    <h2 id="demos-title">Small demos on public data</h2>
+    <p class="section-intro">Original code and public data only. Each demo is AI-assisted, with tests and review gates. Each one stays "in progress" until I mark it ready.</p>
+
+    <div class="cards">
+      <article class="card">
+        <h3 class="demo-name">fan-out-ingest</h3>
+        <p>A pipeline that fans work out across many workers and restarts where it stopped. Built on synthetic data.</p>
+        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+      </article>
+      <article class="card">
+        <h3 class="demo-name">code-graph-lab</h3>
+        <p>Links between pieces of code that say how sure they are: proven, by convention or unknown. Built on a public sample app.</p>
+        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+      </article>
+      <article class="card">
+        <h3 class="demo-name">rag-eval-bench</h3>
+        <p>Pass bars and a no-regression gate for retrieval answers. Built on public documents.</p>
+        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+      </article>
+      <article class="card">
+        <h3 class="demo-name">vertex-gate</h3>
+        <p>A model deploy on Vertex AI that goes live only when its score beats the last version.</p>
+        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+      </article>
+      <article class="card">
+        <h3 class="demo-name">museum-search-lab</h3>
+        <p>Search with a "less of this" option. Built on public museum data.</p>
+        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+      </article>
+    </div>
+
+    <h3 class="notes-title" style="margin-top:2rem">Notes</h3>
+    <article class="card notes-card">
+      <h4 class="demo-name" style="margin:0 0 0.5rem"><a href="/notes/pipelines-that-lie.html">Pipelines that lie</a></h4>
+      <p>An essay about failures that looked like success, and how to catch them.</p>
+      <div class="demo-meta"><span class="chip">essay</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <p class="kicker">05 · Contact</p>
+    <h2 id="contact-title">Say hello</h2>
+    <p>Email is the best way to reach me.</p>
+    <p class="contact-link"><a href="mailto:arorashreyansh02@gmail.com">arorashreyansh02@gmail.com</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>AI-assisted, with tests and review gates.</p>
+    <p>No cookies. No tracking. System fonts only.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipelines that lie · Shreyansh Arora</title>
+<meta name="description" content="An essay about pipelines that look healthy while they lose data.">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://shreyansh012.github.io/notes/pipelines-that-lie.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Shreyansh Arora">
+<meta property="og:title" content="Pipelines that lie">
+<meta property="og:description" content="An essay about pipelines that look healthy while they lose data.">
+<meta property="og:url" content="https://shreyansh012.github.io/notes/pipelines-that-lie.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='black'/%3E%3Cpath d='m8 17l5 5 11-12' fill='none' stroke='cyan' stroke-width='3'/%3E%3C/svg%3E">
+<script>
+(function () {
+  var d = document.documentElement;
+  d.className = d.className.replace("no-js", "js");
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") { d.setAttribute("data-theme", t); }
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="/style.css">
+<script src="/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar-row">
+    <a class="brand" href="/">~/shreyansh</a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/#demos">Demos</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="theme-btn" id="theme-btn" aria-label="Switch to light theme">Light theme</button>
+  </div>
+</header>
+
+<main id="main">
+  <article class="wrap page">
+    <p class="kicker">Notes</p>
+    <h1>Pipelines that lie</h1>
+    <!-- ESSAY:START -->
+    <p>A data pipeline can show all green while it is silently wrong. I have come to think this is the normal failure, not the rare one. Loud failures get fixed. Quiet ones get trusted.</p>
+    <p>None of this is new. Many people have written about it. I am writing it down because I find it useful to name the patterns plainly. Each example below is an invented example, not a real system.</p>
+    <p>My thesis is short. Engineering for trust means making failure loud, honest and testable.</p>
+    <h2>Six ways a green pipeline lies</h2>
+    <h3>1. The success check that looks for the word &quot;error&quot;.</h3>
+    <p>Say a job writes a log, and a wrapper decides success by searching the log for "error". The job then hits "Access denied" when it reads its input. The word "error" never appears. The wrapper sees none, and reports success. The check was built around one failure phrase, and the world had another.</p>
+    <h3>2. The job that has never run.</h3>
+    <p>Say a scheduled job was set up, but its trigger was never enabled. Nothing ran. The dashboard shows the last status as success, because the last status is empty and empty is read as fine. Silence looks the same as health.</p>
+    <h3>3. The stage that drops rows and still exits 0.</h3>
+    <p>Say a parsing stage reads a file and skips any row it cannot parse. It logs a warning and carries on. At the end it exits with code zero (a number a program returns when it ends; 0 means no crash). Half the rows may be gone. The exit code only said the program did not crash.</p>
+    <h3>4. Retries that never run.</h3>
+    <p>Say a job may retry only within one hour of its first attempt. The first attempt hangs for the full hour, then fails. The retry window has already closed, so no retry happens. The setting exists. The protection does not.</p>
+    <h3>5. Counting a file as processed after a failed transaction.</h3>
+    <p>Say a loader writes rows to a database inside a transaction (a group of writes that all succeed or all get undone). The loader marks the file as done before the commit, and the marker is stored outside the transaction. The commit then fails and the rows are undone, but the marker stays. The file is now counted as processed and will never be picked up again.</p>
+    <h3>6. The workflow that reports success after a failure.</h3>
+    <p>Say a workflow has three steps, and step two fails. Step three is set to run "always", to clean up. The workflow's final status is taken from the last step. Cleanup succeeds, so the whole run is green.</p>
+    <p>These six look different. They share one cause. Each check measured something nearby instead of the thing that matters.</p>
+    <h2>What I do about it</h2>
+    <h3>Fail closed.</h3>
+    <p>If a check cannot tell whether things went well, it should say they did not. Unknown is not success. A missing log, an empty status, an unreadable result: all of these should stop the line, not wave it through. The cost is a few false alarms. I will take that trade.</p>
+    <h3>Count rows in and out.</h3>
+    <p>Every stage should know how many records came in and how many went out, and it should account for the difference. Some rows are dropped on purpose, and that is fine, if the count says so. A stage that cannot explain its own difference has not finished.</p>
+    <h3>Plant a known failure and prove the check catches it.</h3>
+    <p>A check that has never failed has never been shown to work. So I put a deliberate fault into a self-test: a file the job cannot read, a row that cannot parse, a step that is forced to fail. Then I confirm the pipeline goes red. If it stays green, I have found a lying check before it found me. This is the single most useful habit on the list. The same goes for AI-written code. A review step that cannot reject anything is worth nothing.</p>
+    <h3>Record what each run actually used.</h3>
+    <p>For every run, write down the inputs it read, the version of the code, the settings, and the time. Not what was meant to be used. What was used. When a result looks odd later, that record turns a guess into a lookup.</p>
+    <h3>Label confidence: proven, inferred, unknown.</h3>
+    <p>When I report on a pipeline, I tag each claim. Proven means I saw it happen, with evidence. Inferred means it follows from something I saw, but I did not see it directly. Unknown means I have not checked. Most bad status reports mix these three into one confident voice. Keeping them apart is a small habit that prevents big surprises.</p>
+    <h3>Separate &quot;the job ran&quot; from &quot;the result is right&quot;.</h3>
+    <p>These are two questions with two answers. The first is about execution. The second is about the output. A green tick can honestly answer the first. Only a check on the output can answer the second. Use row counts, value ranges, and totals that must match. Add a sample that a person looks at. I report the two answers side by side, never merged into one light.</p>
+    <h2>Questions to ask of any pipeline</h2>
+    <ul>
+      <li>What does "success" actually test? Execution, or output?</li>
+      <li>What happens if the check itself cannot run? Does it fail closed?</li>
+      <li>Has this check ever been seen to fail, on purpose, in a test?</li>
+      <li>How many records went in, how many came out, and where is the difference explained?</li>
+      <li>If a retry is configured, can it really fire? What does it count from?</li>
+      <li>Is "done" recorded in the same transaction as the work it describes?</li>
+      <li>If one step fails, can a later step overwrite the final status?</li>
+      <li>Has every scheduled job run at least once, and how do I know?</li>
+      <li>What did the last run actually use, and where is that written down?</li>
+      <li>Which of my claims about this pipeline are proven, which inferred, which unknown?</li>
+    </ul>
+    <p>A pipeline you trust should be one that has had the chance to fail in front of you, and did, loudly. If it has never been asked to fail, you do not know yet whether it can.</p>
+    <p><a href="/">Back to the home page</a></p>
+    <!-- ESSAY:END -->
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>AI-assisted, with tests and review gates.</p>
+    <p>No cookies. No tracking. System fonts only.</p>
+  </div>
+</footer>
+</body>
+</html>
