@@ -137,14 +137,14 @@
     <div class="legend">
       <p><span class="chip measured">measured</span> A run or a test gave a result I can show.</p>
       <p><span class="chip documented">documented</span> A written design, pull request or record backs it.</p>
-      <p><span class="chip demo">demo</span> You can run it yourself in a public repo. Demos are still in progress, so no card has this chip yet.</p>
+      <p><span class="chip demo">demo</span> You can run it yourself in a public repo. Each demo repo has tests you can run.</p>
     </div>
 
     <div class="cards">
       <article class="card">
         <h3>Ingestion that restarts where it stopped</h3>
         <p>I built a code-ingestion pipeline on Argo Workflows. Parsing, embedding and indexing are separate stages. Embedding is the paid step that turns text into numbers for search. If a worker crashes, the paid work is kept, and the restart picks up where it stopped.</p>
-        <div class="chips"><span class="chip documented">documented</span><span class="chip soon">demo in progress</span></div>
+        <div class="chips"><span class="chip documented">documented</span><span class="chip demo">demo</span></div>
       </article>
 
       <article class="card">
@@ -162,7 +162,7 @@
       <article class="card">
         <h3>Answers that get graded</h3>
         <p>I built an evaluation suite for code answers. It has frozen question sets, must-mention checks, checks for made-up file paths and checks for tools that do not exist. A pass bar decides each result. I reported an honest first pass, then a fix cycle.</p>
-        <div class="chips"><span class="chip measured">measured</span><span class="chip soon">demo in progress</span></div>
+        <div class="chips"><span class="chip measured">measured</span><span class="chip demo">demo</span></div>
       </article>
 
       <article class="card">
@@ -175,7 +175,7 @@
           <div class="hop"><span>build_report() → old export job</span><span class="label-chip unknown">unknown</span></div>
           <p class="trace-key">proven: an exact match. by convention: the names match, but nothing proves it. unknown: no match found.</p>
         </div>
-        <div class="chips"><span class="chip measured">measured</span><span class="chip soon">demo in progress</span></div>
+        <div class="chips"><span class="chip measured">measured</span><span class="chip demo">demo</span></div>
       </article>
 
       <article class="card">
@@ -193,7 +193,7 @@
       <article class="card">
         <h3>A model deploy with a gate</h3>
         <p>I built a Vertex AI pipeline on a public BigQuery dataset. It prepares the data, trains a simple model, tests it and registers it. A new model goes live only if it beats the old one. Models and scores are versioned.</p>
-        <div class="chips"><span class="chip documented">documented</span><span class="chip soon">demo in progress</span></div>
+        <div class="chips"><span class="chip documented">documented</span><span class="chip demo">demo</span></div>
       </article>
     </div>
   </div>
@@ -274,33 +274,33 @@
   <div class="wrap">
     <p class="kicker">04 · Demos and notes</p>
     <h2 id="demos-title">Small demos on public data</h2>
-    <p class="section-intro">Original code and public data only. Each demo is AI-assisted, with tests and review gates. Each one stays "in progress" until I mark it ready.</p>
+    <p class="section-intro">Original code and public data only. Each demo is AI-assisted, with tests and review gates. Each one has tests and a decision log.</p>
 
     <div class="cards">
       <article class="card">
-        <h3 class="demo-name">fan-out-ingest</h3>
-        <p>A pipeline that fans work out across many workers and restarts where it stopped. Built on synthetic data.</p>
-        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+        <h3 class="demo-name"><a href="https://github.com/shreyansh012/fan-out-ingest">fan-out-ingest</a></h3>
+        <p>A pipeline that fans work out across many workers and restarts where it stopped. Built on synthetic data. The Argo file is documentation only.</p>
+        <div class="demo-meta"><span class="chip demo">demo</span></div>
       </article>
       <article class="card">
-        <h3 class="demo-name">code-graph-lab</h3>
+        <h3 class="demo-name"><a href="https://github.com/shreyansh012/code-graph-lab">code-graph-lab</a></h3>
         <p>Links between pieces of code that say how sure they are: proven, by convention or unknown. Built on a public sample app.</p>
-        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+        <div class="demo-meta"><span class="chip demo">demo</span></div>
       </article>
       <article class="card">
-        <h3 class="demo-name">rag-eval-bench</h3>
+        <h3 class="demo-name"><a href="https://github.com/shreyansh012/rag-eval-bench">rag-eval-bench</a></h3>
         <p>Pass bars and a no-regression gate for retrieval answers. Built on public documents.</p>
-        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+        <div class="demo-meta"><span class="chip demo">demo</span></div>
       </article>
       <article class="card">
-        <h3 class="demo-name">vertex-gate</h3>
-        <p>A model deploy on Vertex AI that goes live only when its score beats the last version.</p>
-        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+        <h3 class="demo-name"><a href="https://github.com/shreyansh012/vertex-gate">vertex-gate</a></h3>
+        <p>A model deploy on Vertex AI that goes live only when its score beats the last version. The gate logic has tests. The Vertex AI files are documentation only.</p>
+        <div class="demo-meta"><span class="chip demo">demo</span></div>
       </article>
       <article class="card">
-        <h3 class="demo-name">museum-search-lab</h3>
+        <h3 class="demo-name"><a href="https://github.com/shreyansh012/museum-search-lab">museum-search-lab</a></h3>
         <p>Search with a "less of this" option. Built on public museum data.</p>
-        <div class="demo-meta"><span class="chip progress">in progress</span></div>
+        <div class="demo-meta"><span class="chip demo">demo</span></div>
       </article>
     </div>
 
